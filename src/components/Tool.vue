@@ -271,8 +271,8 @@ export default {
     },
     onSubmit() {
     if (this.running) {
-    	this.$emit('toggle')
-    	return 1
+    	this.$emit('toggle');
+    	return 1;
     }
       if (!this.form.category) {
         return this.$message.error('请选择本次抽取的奖项');
