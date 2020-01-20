@@ -37,6 +37,9 @@
           :key="j"
           :data-res="data"
         >
+	<span v-if="!!list.find(d => d.key === data)">
+                {{ list.find(d => d.key === data).name }}
+              </span>
           {{ data }}
         </span>
       </span>
@@ -58,6 +61,9 @@ export default {
       set(val) {
         this.$store.commit('setResult', val);
       }
+    },
+    list () {
+      return this.$store.state.list
     },
     resultList() {
       const list = [];
@@ -126,7 +132,7 @@ export default {
       flex: 1;
     }
     .card {
-      display: inline-block;
+      display: run-in;
       width: 40px;
       height: 40px;
       line-height: 40px;
