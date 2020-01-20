@@ -1,6 +1,6 @@
 <template>
   <div id="tool">
-    <el-button @click="onSubmit" v-focus @keyup.enter="onSubmit" type="primary" size="mini">{{
+    <el-button @click="onSubmit" type="primary" size="mini">{{
       running ? '停止' : '开始'
     }}</el-button>
     <el-button size="mini" @click="startHandler">
@@ -150,12 +150,6 @@ export default {
     running: Boolean,
     closeRes: Function
   },
-  directives: {
-  focus: {
-    inserted: function(el) {
-      el.focus();
-    }
-  },
   computed: {
     config: {
       get() {
@@ -207,6 +201,15 @@ export default {
       },
       listStr: ''
     };
+  },
+  created(){
+	let that = this;
+      document.onkeydown = function (event) {
+      	event = event|| window.event;
+        if (event.keyCode === 13){
+          that.onSubmit();//方法
+        }
+      }
   },
   watch: {
     showRemoveoptions(v) {
