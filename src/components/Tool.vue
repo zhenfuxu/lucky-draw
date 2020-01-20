@@ -1,8 +1,11 @@
 <template>
   <div id="tool">
-    <el-button @click="startHandler" type="primary" size="mini">{{
+    <el-button @click="onSubmit" v-focus @keyup.enter="onSubmit" type="primary" size="mini">{{
       running ? '停止' : '开始'
     }}</el-button>
+    <el-button size="mini" @click="startHandler">
+      配置
+    </el-button>
     <el-button size="mini" @click="showRemoveoptions = true">
       重置
     </el-button>
@@ -147,6 +150,12 @@ export default {
     running: Boolean,
     closeRes: Function
   },
+  directives: {
+  focus: {
+    inserted: function(el) {
+      el.focus();
+    }
+  },
   computed: {
     config: {
       get() {
@@ -261,6 +270,10 @@ export default {
         });
     },
     onSubmit() {
+    if (this.running) {
+    	this.$emit('toggle')
+    	return 1
+    }
       if (!this.form.category) {
         return this.$message.error('请选择本次抽取的奖项');
       }
